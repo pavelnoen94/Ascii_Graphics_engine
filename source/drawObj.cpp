@@ -65,16 +65,16 @@ void DrawObject::drawLoop(){
         0.0, 0.0, 1.0, 0.0
     }*camRotation;
 
-    auto p1 = std::chrono::system_clock::now();
-    auto p2 = std::chrono::system_clock::now();
+    auto start = std::chrono::system_clock::now();
+    auto now = std::chrono::system_clock::now();
     double theta = 0;
     while (true){
         resetBuffers();
 
-        p2 = std::chrono::system_clock::now();
-        std::chrono::duration<double> diff = p2 - p1;
+        now = std::chrono::system_clock::now();
+        std::chrono::duration<double> diff = now - start;
         double elapsedTime = diff.count();
-        p1 = p2;
+        start = now;
         theta = theta< 2*pi ? theta + 0.3*elapsedTime : 0.0;
 
 
