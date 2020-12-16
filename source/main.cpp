@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "draw.h"
 #include "drawObj.h"
 
@@ -10,7 +12,6 @@
 
 int main(int argc, char* argv[]){
     int columns, rows;
-
     #ifdef __unix__
         struct winsize w;
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -23,7 +24,11 @@ int main(int argc, char* argv[]){
         rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
     #endif
 
+    if(argc != 2){
+        std::cout << "usage: " << argv[0] << " OBJFILE\n";
+        return 1;
+    }
     //ConsoleDrawer c{200, 100};
-    DrawObject c{rows, columns, "bunny.obj"};
+    DrawObject c{rows, columns, argv[1]};
     c.drawLoop();
 }
